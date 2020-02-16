@@ -72,7 +72,7 @@ To complete the exercise, you will need to create a number of different **`.js`*
 
     (Each tweet starts with a `-`, then the tweet text in `""` quotes, then a human-readable date and time in parentheses `()`).
 
-    - You can convert the millisecond timestamp _back_ into a human-readable data by constructing a `new Date()` object (passing the timestamp as a parameter to the constructor), and then calling the `toLocalString("en-US")` method on it.
+    - You can convert the millisecond timestamp _back_ into a human-readable data by constructing a `new Date()` object (passing the timestamp as a parameter to the constructor), and then calling the `toLocaleString("en-US")` method on it.
 
     - If the array of tweets is empty, the method should instead log `"No tweets found"`.
 
