@@ -11,7 +11,7 @@ You can see the results of your work by opening up the included `index.html` fil
 
     - a constructor that takes two arguments: a string description of the task, and a boolean for whether or not the task is completed. The constructor should initialize a **`description`** attribute (field) for the task's description and a **`complete`** attribute for whether the task is finished.
   
-    - a **`render()`** method that _returns_ a DOM element representing the object. This element should be a `<li>` whose content is the `description` of the `Task`, and has the `font-strike` CSS class if it is `complete` (to cross it out).
+    - a **`render()`** method that _returns_ a new DOM element representing the object. This element should be a `<li>` whose content is the `description` of the `Task`, and has the `font-strike` CSS class if it is `complete` (to cross it out).
 
     You can test your class by _temporarily_ instantiating it (with the `new` keyword, passing it a description string and completion status) and calling its `render()` method, then appending the returned element to the DOM (e.g., to `#app`).
 
@@ -29,11 +29,11 @@ You can see the results of your work by opening up the included `index.html` fil
     
     - an **`addTask()`** method that takes in a _string_ description of a task, and uses that to instantiate a _new_ `Task` object (which is _not_ complete) and adds it to the list. You will need to call the `Task` constructor!
 
-    - a **`render()`** method that _returns_ an `<ol>` DOM element containing a rendering of each `Task` in the list. Use a `forEach()` loop (with an arrow function callback!) to render each individual `Task` and append the resulting element to the `<ol>`.
+    - a **`render()`** method that _returns_ a new `<ol>` DOM element containing a rendering of each `Task` in the list. Use a `forEach()` loop (with an arrow function callback!) to render each individual `Task` and append the resulting element to the `<ol>`.
 
     You can test your class by _temporarily_ instantiating it (with the `new` keyword, passing it an array of `Task` objects) and calling its `render()` method, then appending the returned element to the DOM (e.g., to `#app`).
 
-4. Define a class **`NewTaskForm`** that represents a form for adding tasks to the list. Your class should include a **`render()`** method that returns a `<form>` DOM element. The `<form>` should include as children:
+4. Define a class **`NewTaskForm`** that represents a form for adding tasks to the list. Your class should include a **`render()`** method that returns a new `<form>` DOM element. The `<form>` should include as children:
 
     - an `<input>` element with CSS classes `form-control` and `mb-3`. The `<input>` should have a `placeholder` attribute of `"What else do you have to do?"` (use the `setAttribute()` method, since the `placeholder` attribute isn't build into the DOM spec!)
 
@@ -45,14 +45,18 @@ You can see the results of your work by opening up the included `index.html` fil
 
     - an attribute **`parentElement`** representing the DOM element containing this app, and an attribute **`taskList`** representing the `TaskList` to render. _Both attributes should be passed in as constructor parameters (in order)._
 
-    - a **`render()`** method that appends the rendered `taskList` attribute to the `parentElement`. It should instantiate a new `NewTaskForm` object, `render()` it, and append that element to the `parentElement` as well.
+    - a **`render()`** method that appends the rendered `taskList` attribute to the given `parentElement`. It should instantiate a new `NewTaskForm` object, `render()` it, and append that element to the `parentElement` as well.
+
+        IMPORTANT: This method should **not** reference the `document` variable! You aren't selecting an existing element; you are working with the element passed in as an argument.
 
         Optionally, to make the form match the previous exercise, you can also append a subheading:
         `<p class="lead">Things I have to do</p>`
 
-6. Instantiate a new `App` object, passing it a reference to the `#app` DOM element as the parent and a new `TaskList` containing two tasks: `"Make some classes"` (marked as complete), and `"Arrow some functions"` (not marked as complete).
+6. Instantiate a new `App` object, passing it a reference to the `#app` DOM element (not a string, but an element!) as the parent and a new `TaskList` containing two tasks: `"Make some classes"` (marked as complete), and `"Arrow some functions"` (not marked as complete).
 
     Then call the `render()` method on your `App` object to make it appear! This is _not_ temporary, and is your full app being shown.
+
+    Again: you're not passing in a string "#app", but the element that is selected by that string!
 
 7. Add the ability for the app to add new tasks to the list (e.g., through the form). Modify the `App` class to give it an additional method **`addTaskToList()`**. This method should take as a parameter a string description of a task, and should call the `taskList` attribute's `addTask()` method to add a new task with that description (and incomplete status).
 
