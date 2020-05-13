@@ -18,7 +18,6 @@ let storeLogFunction = (...inputs) => {
 }
 console['log'] = jest.fn(storeLogFunction) //store results of console.log
 
-
 describe('Source code is valid', () => {
   test('JavaScript lints without errors', async () => {
 
@@ -98,8 +97,11 @@ describe('Controller.js module', () => {
     readline['question'] = jest.fn(() => 'hall'); //mock to return "hall"      
     controller.runSearch();
 
+    //Tue Oct 31 16:10:12 +0000 2017
+    let timestamp = new Date(1509466212000).toLocaleString("en-US");
+
     let tail = LOG.slice(-3);
-    expect(tail).toContain('- "Wishing you all a spooktacular Halloween! https://t.co/EaVawLGlb6" (10/31/2017, 9:10:12 AM)')
+    expect(tail).toContain(`- "Wishing you all a spooktacular Halloween! https://t.co/EaVawLGlb6" (${timestamp})`)
   })
 })
 
@@ -108,8 +110,11 @@ describe('index.js entry script', () => {
     readline['question'] = jest.fn(() => 'fall'); //mock to return "fall"            
     require(__dirname + '/js/index.js'); //run it!
 
+    //Tue Oct 31 22:47:09 +0000 2017
+    let timestamp = new Date(1509490029000).toLocaleString("en-US");
+
     let tail = LOG.slice(-2);
-    expect(tail).toContain('- "RT @amcauce: What a glorious fall we\'re having! https://t.co/FqSn19SkvH" (10/31/2017, 3:47:09 PM)');
+    expect(tail).toContain(`- "RT @amcauce: What a glorious fall we\'re having! https://t.co/FqSn19SkvH" (${timestamp})`);
   })
 })
 
